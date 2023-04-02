@@ -88,6 +88,9 @@ class ListaDobleEnlazadaTest {
         nuevaListaDoble.addAscendente(1);
         nuevaListaDoble.addAscendente(2);
         nuevaListaDoble.addAscendente(0);
+        nuevaListaDoble.remove(1);
+        assertEquals(0, nuevaListaDoble.get(0));
+        assertEquals(2, nuevaListaDoble.get(1));
     }
 
     @Test
