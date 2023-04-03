@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class ListaEnlazadaTest {
+class ListaCircularSimpleTest {
 
     @Test
     void testEmptySizeIsZero() {
@@ -69,6 +69,7 @@ class ListaEnlazadaTest {
         assertEquals("b", nuevaLista2.get(1));
         assertEquals(2, nuevaLista2.size());
     }
+
     @Test
     void testRemoveNonEmpty() {
         Lista<Integer> nuevaLista = new ListaEnlazada<>();
@@ -76,14 +77,19 @@ class ListaEnlazadaTest {
         nuevaLista.add(2);
         nuevaLista.remove(1);
         assertEquals(1, nuevaLista.size());
-        assertNull(nuevaLista.get(1));
-        assertEquals(1, nuevaLista.get(0));
+        nuevaLista.remove(0);
+        assertEquals(0, nuevaLista.size());
     }
 
     @Test
     void testRemoveEmpty() {
         Lista<Integer> nuevaLista = new ListaEnlazada<>();
-        nuevaLista.remove(0);
+        nuevaLista.add(1);
+        nuevaLista.add(2);
+        nuevaLista.remove(1);
+        assertEquals(1, nuevaLista.size());
+        assertNull(nuevaLista.get(1));
+        assertEquals(1, nuevaLista.get(0));
     }
 
     @Test
