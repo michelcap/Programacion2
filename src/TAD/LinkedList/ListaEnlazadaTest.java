@@ -152,9 +152,18 @@ class ListaEnlazadaTest {
         nuevaLista.add(3);
         nuevaLista.add(4);
         nuevaLista.add(5);
-        nuevaLista.intercambiar(1,1);
+        try {
+            nuevaLista.intercambiar(1,1);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
         assertEquals(2, nuevaLista.get(0));
         assertEquals(1, nuevaLista.get(1));
+        ArrayList<Integer> listaNumeros = new ArrayList<>(5);
+        for (int i = 0; i < nuevaLista.size(); i++) {
+            listaNumeros.add(nuevaLista.get(i));
+        }
+        assertArrayEquals(new Integer[]{2, 1, 3, 4, 5}, listaNumeros.toArray());
     }
 
     @Test
@@ -165,9 +174,19 @@ class ListaEnlazadaTest {
         nuevaLista.add(3);
         nuevaLista.add(4);
         nuevaLista.add(5);
-        nuevaLista.intercambiar(3,1);
+        try {
+            nuevaLista.intercambiar(3,1);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
         assertEquals(4, nuevaLista.get(2));
         assertEquals(3, nuevaLista.get(3));
+
+        ArrayList<Integer> listaNumeros = new ArrayList<>(5);
+        for (int i = 0; i < nuevaLista.size(); i++) {
+            listaNumeros.add(nuevaLista.get(i));
+        }
+        assertArrayEquals(new Integer[]{1, 2, 4, 3, 5}, listaNumeros.toArray());
     }
 
     @Test
@@ -178,8 +197,86 @@ class ListaEnlazadaTest {
         nuevaLista.add(3);
         nuevaLista.add(4);
         nuevaLista.add(5);
-        nuevaLista.intercambiar(4,1);
+        try {
+            nuevaLista.intercambiar(4,1);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
         assertEquals(4, nuevaLista.get(4));
         assertEquals(5, nuevaLista.get(3));
+
+        ArrayList<Integer> listaNumeros = new ArrayList<>(5);
+        for (int i = 0; i < nuevaLista.size(); i++) {
+            listaNumeros.add(nuevaLista.get(i));
+        }
+        assertArrayEquals(new Integer[]{1, 2, 3, 5, 4}, listaNumeros.toArray());
+    }
+
+    @Test
+    void testIntercambiarHEADNegativamente() {
+        Lista<Integer> nuevaLista = new ListaEnlazada<>();
+        nuevaLista.add(1);
+        nuevaLista.add(2);
+        nuevaLista.add(3);
+        nuevaLista.add(4);
+        nuevaLista.add(5);
+        try {
+            nuevaLista.intercambiar(1,-1);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        assertEquals(5, nuevaLista.get(0));
+        assertEquals(1, nuevaLista.get(4));
+        ArrayList<Integer> listaNumeros = new ArrayList<>(5);
+        for (int i = 0; i < nuevaLista.size(); i++) {
+            listaNumeros.add(nuevaLista.get(i));
+        }
+        assertArrayEquals(new Integer[]{5, 2, 3, 4, 1}, listaNumeros.toArray());
+    }
+
+    @Test
+    void testIntercambiarSectorMedioNegativamente() throws Exception {
+        Lista<Integer> nuevaLista = new ListaEnlazada<>();
+        nuevaLista.add(1);
+        nuevaLista.add(2);
+        nuevaLista.add(3);
+        nuevaLista.add(4);
+        nuevaLista.add(5);
+        try {
+            nuevaLista.intercambiar(4,-1);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        assertEquals(4, nuevaLista.get(2));
+        assertEquals(3, nuevaLista.get(3));
+
+        ArrayList<Integer> listaNumeros = new ArrayList<>(5);
+        for (int i = 0; i < nuevaLista.size(); i++) {
+            listaNumeros.add(nuevaLista.get(i));
+        }
+        assertArrayEquals(new Integer[]{1, 2, 4, 3, 5}, listaNumeros.toArray());
+    }
+
+    @Test
+    void testIntercambiarFEETNegativamente() throws Exception {
+        Lista<Integer> nuevaLista = new ListaEnlazada<>();
+        nuevaLista.add(1);
+        nuevaLista.add(2);
+        nuevaLista.add(3);
+        nuevaLista.add(4);
+        nuevaLista.add(5);
+        try {
+            nuevaLista.intercambiar(5,-1);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        assertEquals(4, nuevaLista.get(4));
+        assertEquals(5, nuevaLista.get(3));
+
+        ArrayList<Integer> listaNumeros = new ArrayList<>(5);
+        for (int i = 0; i < nuevaLista.size(); i++) {
+            listaNumeros.add(nuevaLista.get(i));
+        }
+        assertArrayEquals(new Integer[]{1, 2, 3, 5, 4}, listaNumeros.toArray());
     }
 }

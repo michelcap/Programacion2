@@ -190,42 +190,85 @@ public class ListaEnlazada<T extends Comparable<T>> implements Lista<T> {
     }
 
     @Override
-    public void intercambiar(T value, int direccion) {
-//        if (direccion != 1 || direccion != -1) {
-//            throw new IllegalArgumentException("Los valores deben de ser 1 o -1");
-//        }
-
-        if (getPrimero() != null) {
-            if (direccion == 1) {
-                if (getPrimero().getValue().equals(value)) {
-                    Nodo<T> next = getPrimero().getNext();
-                    getPrimero().setNext(next.getNext());
-                    next.setNext(getPrimero());
-                    setPrimero(next);
-                } else {
-                    Nodo<T> currentNodo = getPrimero();
-                    Nodo<T> lastNodo = currentNodo;
-                    Nodo<T> next = currentNodo.getNext();
-                    for (int i = 0; i < size ; i++) {
-                        if (next.getValue().equals(value)) {
-                            if (next.getNext() == getUltimo()) {
-                                setUltimo(next);
+    public void intercambiar(T value, int direccion) throws Exception {
+        if ((direccion == 1) || (direccion == -1)) {
+            if (getPrimero() != null) {
+                if (direccion == 1) {
+                    if (getPrimero().getValue().equals(value)) {
+                        Nodo<T> next = getPrimero().getNext();
+                        getPrimero().setNext(next.getNext());
+                        next.setNext(getPrimero());
+                        setPrimero(next);
+                    } else {
+                        Nodo<T> currentNodo = getPrimero();
+                        Nodo<T> lastNodo = currentNodo;
+                        Nodo<T> next = currentNodo.getNext();
+                        for (int i = 0; i < size ; i++) {
+                            if (next.getValue().equals(value)) {
+                                if (next.getNext() == getUltimo()) {
+                                    setUltimo(next);
+                                }
+                                lastNodo = currentNodo;
+                                currentNodo = next;
+                                next = next.getNext();
+                                lastNodo.setNext(next);
+                                currentNodo.setNext(next.getNext());
+                                next.setNext(currentNodo);
+                                break;
+                            } else {
+                                lastNodo = currentNodo;
+                                currentNodo = next;
+                                next = currentNodo.getNext();
                             }
-                            lastNodo = currentNodo;
-                            currentNodo = next;
-                            next = next.getNext();
-                            lastNodo.setNext(next);
-                            currentNodo.setNext(next.getNext());
-                            next.setNext(currentNodo);
-                            break;
-                        } else {
-                            lastNodo = currentNodo;
-                            currentNodo = next;
-                            next = currentNodo.getNext();
+                        }
+                    }
+                } else if (direccion == -1) {
+                    if (getPrimero().getValue().equals(value)) {
+                        Nodo<T> currentNodo = getPrimero();
+                        Nodo<T> lastNodo = currentNodo;
+                        Nodo<T> next = currentNodo.getNext();
+                        for (int i = 0; i < size ; i++) {
+                            if (next.equals(getUltimo())) {
+                                currentNodo.setNext(getPrimero());
+                                getUltimo().setNext(getPrimero().getNext());
+                                getPrimero().setNext(null);
+                                lastNodo = getUltimo();
+                                setUltimo(getPrimero());
+                                setPrimero(lastNodo);
+                                break;
+                            } else {
+                                lastNodo = currentNodo;
+                                currentNodo = next;
+                                next = currentNodo.getNext();
+                            }
+                        }
+                    } else {
+                        Nodo<T> currentNodo = getPrimero();
+                        Nodo<T> lastNodo = currentNodo;
+                        Nodo<T> next = currentNodo.getNext();
+                        for (int i = 0; i < size ; i++) {
+                            if (next.getValue().equals(value)) {
+                                if (lastNodo == getPrimero()) {
+                                    setPrimero(next);
+                                }
+                                if (next == getUltimo()) {
+                                    setUltimo(currentNodo);
+                                }
+                                currentNodo.setNext(next.getNext());
+                                next.setNext(currentNodo);
+                                lastNodo.setNext(next);
+                                break;
+                            } else {
+                                lastNodo = currentNodo;
+                                currentNodo = next;
+                                next = currentNodo.getNext();
+                            }
                         }
                     }
                 }
             }
+        } else {
+            throw new IllegalArgumentException("Los valores deben de ser 1 o -1");
         }
     }
 }

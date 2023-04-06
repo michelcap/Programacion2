@@ -17,6 +17,6 @@ public interface Lista<T> {
 
     void addLast(T value);
 
-    void intercambiar(T value, int direccion);
+    void intercambiar(T value, int direccion) throws Exception;
 }
 
