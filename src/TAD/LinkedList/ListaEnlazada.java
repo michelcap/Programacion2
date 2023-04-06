@@ -92,14 +92,14 @@ public class ListaEnlazada<T extends Comparable<T>> implements Lista<T> {
     }
 
     @Override
-    public T get(int position) {
-        T retorno = null;
+    public Nodo<T> get(int position) {
+        Nodo<T> retorno = null;
         Nodo<T> retornoNodo = getPrimero();
         if (retornoNodo != null) {
             int contador = 0;
             while (retornoNodo != null) {
                 if (contador == position) {
-                    retorno = retornoNodo.getValue();
+                    retorno = retornoNodo;
                     break;
                 } else {
                     retornoNodo = retornoNodo.getNext();
@@ -203,7 +203,7 @@ public class ListaEnlazada<T extends Comparable<T>> implements Lista<T> {
                         Nodo<T> currentNodo = getPrimero();
                         Nodo<T> lastNodo = currentNodo;
                         Nodo<T> next = currentNodo.getNext();
-                        for (int i = 0; i < size ; i++) {
+                        for (int i = 0; i < size; i++) {
                             if (next.getValue().equals(value)) {
                                 if (next.getNext() == getUltimo()) {
                                     setUltimo(next);
@@ -227,7 +227,7 @@ public class ListaEnlazada<T extends Comparable<T>> implements Lista<T> {
                         Nodo<T> currentNodo = getPrimero();
                         Nodo<T> lastNodo = currentNodo;
                         Nodo<T> next = currentNodo.getNext();
-                        for (int i = 0; i < size ; i++) {
+                        for (int i = 0; i < size; i++) {
                             if (next.equals(getUltimo())) {
                                 currentNodo.setNext(getPrimero());
                                 getUltimo().setNext(getPrimero().getNext());
@@ -246,7 +246,7 @@ public class ListaEnlazada<T extends Comparable<T>> implements Lista<T> {
                         Nodo<T> currentNodo = getPrimero();
                         Nodo<T> lastNodo = currentNodo;
                         Nodo<T> next = currentNodo.getNext();
-                        for (int i = 0; i < size ; i++) {
+                        for (int i = 0; i < size; i++) {
                             if (next.getValue().equals(value)) {
                                 if (lastNodo == getPrimero()) {
                                     setPrimero(next);
@@ -269,6 +269,39 @@ public class ListaEnlazada<T extends Comparable<T>> implements Lista<T> {
             }
         } else {
             throw new IllegalArgumentException("Los valores deben de ser 1 o -1");
+        }
+    }
+
+    @Override
+    public Nodo<T> getFirst() {
+        return getPrimero();
+    }
+
+    @Override
+    public Nodo<T> getLast() {
+        return getUltimo();
+    }
+
+    @Override
+    public void setFirst(Nodo<T> value) {
+        setPrimero(value);
+    }
+
+    @Override
+    public void setLast(Nodo<T> value) {
+        setLast(value);
+    }
+
+    @Override
+    public void append(Lista<T> lista) {
+        Nodo<T> lastNodo = getUltimo();
+        if (lastNodo != null) {
+            Nodo<T> nuevoNodo = lista.getFirst();
+            if (nuevoNodo != null) {
+                lastNodo.setNext(nuevoNodo);
+                setUltimo((Nodo<T>) lista.getLast());
+                size = size + lista.size();
+            }
         }
     }
 }

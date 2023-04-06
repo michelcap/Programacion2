@@ -5,7 +5,7 @@ public interface Lista<T> {
 
     void addAscendente (T value);
 
-    T get (int position);
+    Nodo<T> get (int position);
 
     void remove (int position);
 
@@ -18,5 +18,16 @@ public interface Lista<T> {
     void addLast(T value);
 
     void intercambiar(T value, int direccion) throws Exception;
+
+    Nodo<T> getFirst();
+
+    Nodo<T> getLast();
+
+    void setFirst(Nodo<T> value);
+
+    void setLast(Nodo<T> value);
+
+    void append(Lista<T> lista);
+
 }
 
