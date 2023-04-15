@@ -12,7 +12,7 @@ class MyStackImplTest {
         myStack.push(1);
         myStack.push(2);
         myStack.push(3);
-        assertEquals(3, myStack.top());
+        assertEquals(3, myStack.top().getValue());
     }
 
     @Test
@@ -21,9 +21,9 @@ class MyStackImplTest {
         myStack.push(1);
         myStack.push(2);
         myStack.push(3);
-        assertEquals(3, myStack.pop());
-        assertEquals(2, myStack.pop());
-        assertEquals(1, myStack.pop());
+        assertEquals(3, myStack.pop().getValue());
+        assertEquals(2, myStack.pop().getValue());
+        assertEquals(1, myStack.pop().getValue());
     }
 
     @Test
@@ -32,7 +32,7 @@ class MyStackImplTest {
         myStack.push(1);
         myStack.push(2);
         myStack.push(3);
-        assertEquals(3, myStack.top());
+        assertEquals(3, myStack.top().getValue());
     }
 
     @Test

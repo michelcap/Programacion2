@@ -35,20 +35,20 @@ public class MyStackImpl<T> implements MyStack<T> {
     }
 
     @Override
-    public T pop() throws EmptyStackException {
-        T retorno = null;
+    public Nodo<T> pop() throws EmptyStackException {
+        Nodo<T> retorno;
         if (getHead() == null) {
             throw new EmptyStackException();
         } else {
             Nodo<T> aux = getHead();
             if (aux.getPrevious() != null) {
                 Nodo<T> newHead = aux.getPrevious();
-                retorno = aux.getValue();
+                retorno = aux;
                 setHead(newHead);
                 aux.setPrevious(null);
                 newHead.setNext(null);
             } else {
-                retorno = aux.getValue();
+                retorno = aux;
                 aux.setNext(null);
                 aux.setPrevious(null);
                 setHead(null);
@@ -58,8 +58,8 @@ public class MyStackImpl<T> implements MyStack<T> {
     }
 
     @Override
-    public T top() throws EmptyStackException {
-        element = getHead().getValue();
+    public Nodo<T> top() throws EmptyStackException {
+        Nodo<T> element = getHead();
         return element;
     }
 

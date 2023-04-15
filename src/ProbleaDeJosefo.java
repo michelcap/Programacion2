@@ -46,6 +46,4 @@ public class ProbleaDeJosefo {
         }
         return nuevoJuego.get(index+1);
     }
-
-
 }
