@@ -1,10 +1,10 @@
 package TAD.Queue;
 
-public interface MyQueue<T> {
+public interface MyPriorityQueue<T> {
 
-    void enqueue(T element);
+    void enqueue(int priority, T element);
 
-    NodoQueue<T> dequeue() throws EmptyQueueException;
+    NodoQueue<T> dequeue() throws MyQueue.EmptyQueueException;
 
     NodoQueue<T> head();
 
@@ -20,5 +20,5 @@ public interface MyQueue<T> {
         }
     }
 
-
+    NodoQueue<T> get(int i);
 }

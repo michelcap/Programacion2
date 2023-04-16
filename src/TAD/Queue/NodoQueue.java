@@ -1,13 +1,15 @@
 package TAD.Queue;
 
-public class NodoQueue<T> {
+public class NodoQueue<T> implements Comparable<NodoQueue<T>> {
+    private Integer key;
     private T value;
     private NodoQueue<T> previous;
     private NodoQueue<T> next;
     private NodoQueue<T> head;
     private NodoQueue<T> tail;
 
-    public NodoQueue(T value) {
+    public NodoQueue(int key, T value) {
+        this.key = key;
         this.value = value;
     }
 
@@ -19,6 +21,10 @@ public class NodoQueue<T> {
     // Setter value
     public void setValue(T new_Value) {
         this.value = new_Value;
+    }
+
+    public int getKey() {
+        return key;
     }
 
     // Getter previous
@@ -35,6 +41,7 @@ public class NodoQueue<T> {
     public NodoQueue<T> getNext() {
         return next;
     }
+
     // Setter next
     public void setNext(NodoQueue<T> new_Next) {
         this.next = new_Next;
@@ -54,5 +61,14 @@ public class NodoQueue<T> {
 
     public void setTail(NodoQueue<T> tail) {
         this.tail = tail;
+    }
+
+    @Override
+    public int compareTo(NodoQueue<T> o) {
+        return this.key.compareTo(o.getKey());
+    }
+
+    public boolean equals(NodoQueue<T> o) {
+        return this.key.equals(o.getKey()) && this.value.equals(o.getValue());
     }
 }

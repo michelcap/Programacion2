@@ -11,7 +11,7 @@ public class MyQueueImpl<T> implements MyQueue<T> {
         this.size = 0;
     }
 
-    public NodoQueue<T> getHead() {
+    public NodoQueue<T> head() {
         return head;
     }
 
@@ -19,7 +19,7 @@ public class MyQueueImpl<T> implements MyQueue<T> {
         this.head = head;
     }
 
-    public NodoQueue<T> getTail() {
+    public NodoQueue<T> tail() {
         return tail;
     }
 
@@ -27,7 +27,7 @@ public class MyQueueImpl<T> implements MyQueue<T> {
         this.tail = tail;
     }
 
-    public int getSize() {
+    public int size() {
         return size;
     }
 
@@ -38,14 +38,16 @@ public class MyQueueImpl<T> implements MyQueue<T> {
     @Override
     public void enqueue(T element) {
         if (isEmpty()) {
-            NodoQueue<T> nuevoNodo = new NodoQueue<>(element);
+            NodoQueue<T> nuevoNodo = new NodoQueue<>(0, element);
             setHead(nuevoNodo);
             setTail(nuevoNodo);
+            setSize(size() + 1);
         } else {
-            NodoQueue<T> nuevoNodo = new NodoQueue<>(element);
-            getTail().setPrevious(nuevoNodo);
-            nuevoNodo.setNext(getTail());
+            NodoQueue<T> nuevoNodo = new NodoQueue<>(0, element);
+            tail().setPrevious(nuevoNodo);
+            nuevoNodo.setNext(tail());
             setTail(nuevoNodo);
+            setSize(size() + 1);
         }
     }
 
@@ -54,17 +56,18 @@ public class MyQueueImpl<T> implements MyQueue<T> {
         if (isEmpty()) {
             throw new EmptyQueueException("Queue is empty");
         } else {
-            NodoQueue<T> nodo = getHead();
+            NodoQueue<T> nodo = head();
             setHead(nodo.getPrevious());
             nodo.getPrevious().setNext(null);
             nodo.setPrevious(null);
-            setSize(getSize() - 1);
+            setSize(size() - 1);
             return nodo;
         }
     }
 
     @Override
     public boolean isEmpty() {
-        return getHead() == null;
+        return head() == null;
     }
+
 }

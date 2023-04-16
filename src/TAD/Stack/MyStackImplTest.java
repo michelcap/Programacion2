@@ -8,7 +8,7 @@ class MyStackImplTest {
 
     @Test
     void push() {
-        MyStackImpl<Integer> myStack = new MyStackImpl<>();
+        MyStack<Integer> myStack = new MyStackImpl<>();
         myStack.push(1);
         myStack.push(2);
         myStack.push(3);
@@ -17,7 +17,7 @@ class MyStackImplTest {
 
     @Test
     void pop() {
-        MyStackImpl<Integer> myStack = new MyStackImpl<>();
+        MyStack<Integer> myStack = new MyStackImpl<>();
         myStack.push(1);
         myStack.push(2);
         myStack.push(3);
@@ -28,7 +28,7 @@ class MyStackImplTest {
 
     @Test
     void top() {
-        MyStackImpl<Integer> myStack = new MyStackImpl<>();
+        MyStack<Integer> myStack = new MyStackImpl<>();
         myStack.push(1);
         myStack.push(2);
         myStack.push(3);
@@ -37,7 +37,7 @@ class MyStackImplTest {
 
     @Test
     void isEmpty() {
-        MyStackImpl<Integer> myStack = new MyStackImpl<>();
+        MyStack<Integer> myStack = new MyStackImpl<>();
         myStack.push(1);
         myStack.push(2);
         myStack.push(3);
@@ -48,7 +48,7 @@ class MyStackImplTest {
 
     @Test
     void makeEmpty() {
-        MyStackImpl<Integer> myStack = new MyStackImpl<>();
+        MyStack<Integer> myStack = new MyStackImpl<>();
         myStack.push(1);
         myStack.push(2);
         myStack.push(3);
