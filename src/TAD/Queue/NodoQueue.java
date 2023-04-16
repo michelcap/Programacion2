@@ -65,6 +65,7 @@ public class NodoQueue<T> implements Comparable<NodoQueue<T>> {
 
     @Override
     public int compareTo(NodoQueue<T> o) {
+
         return this.key.compareTo(o.getKey());
     }
 
