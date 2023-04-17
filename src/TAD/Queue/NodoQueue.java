@@ -72,4 +72,42 @@ public class NodoQueue<T> implements Comparable<NodoQueue<T>> {
     public boolean equals(NodoQueue<T> o) {
         return this.key.equals(o.getKey()) && this.value.equals(o.getValue());
     }
+
+    public T sumar(T num2) {
+        if (num2 == null) {
+            if (getValue() instanceof Integer) {
+                return (T) Integer.valueOf(((Integer) getValue()).intValue() + 1);
+            } else if (getValue() instanceof Double) {
+                return (T) Double.valueOf(((Double) getValue()).doubleValue() + 1);
+            } else {
+                throw new IllegalArgumentException("Los números deben ser del mismo tipo (entero o doble)");
+            }
+        }
+        if (num2 instanceof Integer) {
+            return (T) Integer.valueOf(((Integer) getValue()).intValue() + ((Integer) num2).intValue());
+        } else if (num2 instanceof Double) {
+            return (T) Double.valueOf(((Double) getValue()).doubleValue() + ((Double) num2).doubleValue());
+        } else {
+            throw new IllegalArgumentException("Los números deben ser del mismo tipo (entero o doble)");
+        }
+    }
+
+    public T restar(T num2) {
+        if (num2 == null) {
+            if (getValue() instanceof Integer) {
+                return (T) Integer.valueOf(((Integer) getValue()).intValue() - 1);
+            } else if (getValue() instanceof Double) {
+                return (T) Double.valueOf(((Double) getValue()).doubleValue() - 1);
+            } else {
+                throw new IllegalArgumentException("Los números deben ser del mismo tipo (entero o doble)");
+            }
+        }
+        if (num2 instanceof Integer) {
+            return (T) Integer.valueOf(((Integer) getValue()).intValue() - ((Integer) num2).intValue());
+        } else if (num2 instanceof Double) {
+            return (T) Double.valueOf(((Double) getValue()).doubleValue() - ((Double) num2).doubleValue());
+        } else {
+            throw new IllegalArgumentException("Los números deben ser del mismo tipo (entero o doble)");
+        }
+    }
 }
