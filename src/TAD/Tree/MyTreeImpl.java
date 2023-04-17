@@ -10,7 +10,7 @@ public class MyTreeImpl<K, T> implements MyTree<K, T> {
     NodoTree<K, T> raiz;
     int size = 0;
 
-    MyTreeImpl() {
+    public MyTreeImpl() {
         this.key = null;
         this.data = null;
     }
@@ -21,14 +21,6 @@ public class MyTreeImpl<K, T> implements MyTree<K, T> {
 
     public void setKey(K key) {
         this.key = key;
-    }
-
-    public int getSize() {
-        return size;
-    }
-
-    public void setSize(int size) {
-        this.size = size;
     }
 
     public T getData() {
@@ -55,12 +47,21 @@ public class MyTreeImpl<K, T> implements MyTree<K, T> {
         this.raiz = raiz;
     }
 
+    public int getSize() {
+        return size;
+    }
+
+    public void setSize(int size) {
+        this.size = size;
+    }
+
     @Override
     public void insert(K key, T data) {
         NodoTree<K, T> nodo = new NodoTree<>(key, data);
         if (getRaiz() == null) {
             NodoTree<K, T> kayParent = new NodoTree<>(key, data);
             setParent(kayParent);
+            setRaiz(kayParent);
             nodo.setLeftChild(null);
             nodo.setRightChild(null);
             size++;
@@ -70,6 +71,7 @@ public class MyTreeImpl<K, T> implements MyTree<K, T> {
                     getParent().setRightChild(nodo);
                     nodo.setLeftChild(null);
                     nodo.setRightChild(null);
+                    setParent(getRaiz());
                     size++;
                 } else if (nodo.compareTo(getParent().getRightChild()) == 0) {
                     getParent().getRightChild().setCount();
@@ -82,6 +84,7 @@ public class MyTreeImpl<K, T> implements MyTree<K, T> {
                     getParent().setLeftChild(nodo);
                     nodo.setLeftChild(null);
                     nodo.setRightChild(null);
+                    setParent(getRaiz());
                     size++;
                 } else if (nodo.compareTo(getParent().getLeftChild()) == 0) {
                     getParent().getLeftChild().setCount();
@@ -95,9 +98,45 @@ public class MyTreeImpl<K, T> implements MyTree<K, T> {
         }
     }
 
+    private NodoTree<K, T> serch(K key) {
+        NodoTree<K, T> nodo = new NodoTree<>(key, null);
+        NodoTree<K, T> retorno = null;
+        if (getParent().compareTo(nodo) < 0) {
+            if (getParent().getRightChild() == null) {
+                retorno = null;
+            }
+            if (nodo.compareTo(getParent().getRightChild()) == 0) {
+                return getParent().getRightChild();
+            } else {
+                setParent(getParent().getRightChild());
+                retorno = serch(key);
+            }
+        } else if (getParent().compareTo(nodo) > 0) {
+            if (getParent().getLeftChild() == null) {
+                retorno = null;
+            }
+            if (nodo.compareTo(getParent().getLeftChild()) == 0) {
+                retorno = getParent().getLeftChild();
+            } else {
+                setParent(getParent().getLeftChild());
+                retorno = serch(key);
+            }
+        } else {
+            retorno = getParent();
+        }
+        return retorno;
+    }
+
     @Override
     public NodoTree<K, T> find(K key) {
-        return null;
+        NodoTree<K,T> retorno = null;
+        if (getRaiz() == null) {
+            retorno = null;
+        } else {
+            setParent(getRaiz());
+            retorno = serch(key);
+        }
+        return retorno;
     }
 
     @Override

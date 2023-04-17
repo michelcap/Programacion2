@@ -4,9 +4,11 @@ import TAD.LinkedList.Lista;
 
 public interface MyTree<K, T> {
 
+    void insert(K key, T data);
+
     NodoTree<K,T> find(K key);
 
-    void insert(K key, T data);
+    NodoTree<K,T> getRaiz();
 
     void delete(K key);
 

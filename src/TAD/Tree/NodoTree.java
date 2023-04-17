@@ -34,7 +34,7 @@ public class NodoTree<K, T> implements Comparable<NodoTree<K, T>>{
     }
 
     public void setCount() {
-        this.count = getCount()+1;
+        this.count = getCount() + 1;
     }
 
     public NodoTree<K, T> getLeftChild() {
@@ -61,5 +61,15 @@ public class NodoTree<K, T> implements Comparable<NodoTree<K, T>>{
             return 1;
         else
         return 0;
+    }
+
+    public int nodosCompletos(NodoTree<K, T> n) {
+        if (n == null)
+            return 0;
+        else {
+            if (n.getLeftChild()!= null && n.getRightChild() != null)
+                return nodosCompletos(n.getLeftChild()) + nodosCompletos(n.getRightChild()) + 1;
+            return nodosCompletos(n.getLeftChild()) + nodosCompletos(n.getRightChild());
+        }
     }
 }
