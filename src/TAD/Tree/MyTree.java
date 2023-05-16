@@ -18,11 +18,13 @@ public interface MyTree<K, T> {
 
     int countNonLeaf();
 
-    Lista<K> inOrder();
+    int countCompleteElements();
 
-    Lista<K> preOrder();
+    Lista<T> inOrder();
 
-    Lista<K> postOrder();
+    Lista<T> preOrder();
+
+    Lista<T> postOrder();
 
     boolean isEmpty();
 }

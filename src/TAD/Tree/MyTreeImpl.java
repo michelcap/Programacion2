@@ -1,7 +1,7 @@
 package TAD.Tree;
 
 import TAD.LinkedList.Lista;
-import TAD.LinkedList.Nodo;
+import TAD.LinkedList.ListaEnlazada;
 
 public class MyTreeImpl<K, T> implements MyTree<K, T> {
     K key;
@@ -149,9 +149,21 @@ public class MyTreeImpl<K, T> implements MyTree<K, T> {
         return getSize();
     }
 
+    private int cuentaHoja(NodoTree<K, T> nodo) {
+        if (nodo == null) {
+            return 0;
+        }
+        if (nodo.getLeftChild() == null && nodo.getRightChild() == null) {
+            return 1;
+        }
+        int left = cuentaHoja(nodo.getLeftChild());
+        int right = cuentaHoja(nodo.getRightChild());
+        return left + right;
+    }
+
     @Override
     public int countLeaf() {
-        return 0;
+        return cuentaHoja(raiz);
     }
 
     @Override
@@ -159,19 +171,64 @@ public class MyTreeImpl<K, T> implements MyTree<K, T> {
         return 0;
     }
 
-    @Override
-    public Lista<K> inOrder() {
-        return null;
+    int cuentaNodoLleno(NodoTree<K, T> nodo) {
+        if (nodo == null) {
+            return 0;
+        }
+        int left = cuentaNodoLleno(nodo.getLeftChild());
+        int right = cuentaNodoLleno(nodo.getRightChild());
+        if (nodo.getLeftChild() != null && nodo.getRightChild() != null) {
+            return left + right + 1;
+        } else {
+            return left + right;
+        }
     }
 
     @Override
-    public Lista<K> preOrder() {
-        return null;
+    public int countCompleteElements() {
+        return cuentaNodoLleno(raiz);
     }
 
+    private Lista<T> inOrden(NodoTree<K, T> nodo, Lista<T> lista) {
+        if (nodo!= null) {
+            inOrden(nodo.getLeftChild(),lista);
+            lista.add(nodo.getData());
+            inOrden(nodo.getRightChild(), lista);
+        }
+        return lista;
+    }
     @Override
-    public Lista<K> postOrder() {
-        return null;
+    public Lista<T> inOrder() {
+        Lista<T> lista = new ListaEnlazada();
+        return inOrden(raiz, lista);
+    }
+
+    private Lista<T> preOrden(NodoTree<K, T> nodo, Lista<T> lista) {
+        if (nodo!= null) {
+            lista.add(nodo.getData());
+            preOrden(nodo.getLeftChild(),lista);
+            preOrden(nodo.getRightChild(), lista);
+        }
+        return lista;
+    }
+    @Override
+    public Lista<T> preOrder() {
+        Lista<T> lista = new ListaEnlazada();
+        return preOrden(raiz, lista);
+    }
+
+    private Lista<T> postOrden(NodoTree<K, T> nodo, Lista<T> lista) {
+        if (nodo!= null) {
+            postOrden(nodo.getLeftChild(),lista);
+            postOrden(nodo.getRightChild(), lista);
+            lista.add(nodo.getData());
+        }
+        return lista;
+    }
+    @Override
+    public Lista<T> postOrder() {
+        Lista<T> lista = new ListaEnlazada();
+        return postOrden(raiz, lista);
     }
 
     @Override
