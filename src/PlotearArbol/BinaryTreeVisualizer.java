@@ -22,6 +22,19 @@ public class BinaryTreeVisualizer<K,T> extends JPanel {
 //        arbol.insert(12, "j");
 //        arbol.insert(0, "k");
 
+//        arbol.insert(10, "a");
+//        arbol.insert(4, "b");
+//        arbol.insert(15, "c");
+//        arbol.insert(6, "e");
+//        arbol.insert(30, "g");
+//        arbol.insert(5, "j");
+//        arbol.insert(7, "k");
+//        arbol.insert(1, "d");
+//        arbol.insert(3, "i");
+//        arbol.insert(25, "n");
+//        arbol.insert(12, "f");
+//        arbol.insert(0, "h");
+
         arbol.insert(10, "a");
         arbol.insert(4, "b");
         arbol.insert(15, "c");
@@ -33,7 +46,8 @@ public class BinaryTreeVisualizer<K,T> extends JPanel {
         arbol.insert(3, "i");
         arbol.insert(25, "n");
         arbol.insert(12, "f");
-        arbol.insert(0, "h");
+        arbol.insert(0, "z");
+//        arbol.delete(10);
         // Creamos un panel para mostrar el árbol binario
         BinaryTreePanel<Integer, String> panel = new BinaryTreePanel<>(arbol.getRaiz());
         panel.setRadius(30);

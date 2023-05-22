@@ -29,6 +29,14 @@ class MyQueueImplTest {
     }
 
     @Test
+    void dequeueColaConSoloUnElemento() throws MyQueue.EmptyQueueException {
+        MyQueue<Integer> queue;
+        queue = new MyQueueImpl<>();
+        queue.enqueue(1);
+        assertEquals(1, queue.dequeue().getValue());
+    }
+
+    @Test
     void isEmpty() {
         MyQueue<Integer> queue = new MyQueueImpl<>();
         assertTrue(queue.isEmpty());

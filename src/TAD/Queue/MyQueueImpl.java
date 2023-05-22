@@ -53,16 +53,19 @@ public class MyQueueImpl<T> implements MyQueue<T> {
 
     @Override
     public NodoQueue<T> dequeue() throws EmptyQueueException {
+        NodoQueue<T> nodo = head();
         if (isEmpty()) {
             throw new EmptyQueueException("Queue is empty");
         } else {
-            NodoQueue<T> nodo = head();
-            setHead(nodo.getPrevious());
-            nodo.getPrevious().setNext(null);
-            nodo.setPrevious(null);
-            setSize(size() - 1);
-            return nodo;
+            if (nodo.getPrevious() != null && head() != null) {
+                nodo.getPrevious().setNext(null);
+                setHead(nodo.getPrevious());
+                setSize(size() - 1);
+            } else {
+                setHead(null);
+            }
         }
+        return nodo;
     }
 
     @Override

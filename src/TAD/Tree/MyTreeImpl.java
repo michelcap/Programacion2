@@ -2,6 +2,8 @@ package TAD.Tree;
 
 import TAD.LinkedList.Lista;
 import TAD.LinkedList.ListaEnlazada;
+import TAD.Queue.MyQueue;
+import TAD.Queue.MyQueueImpl;
 
 public class MyTreeImpl<K, T> implements MyTree<K, T> {
     K key;
@@ -129,7 +131,7 @@ public class MyTreeImpl<K, T> implements MyTree<K, T> {
 
     @Override
     public NodoTree<K, T> find(K key) {
-        NodoTree<K,T> retorno = null;
+        NodoTree<K, T> retorno = null;
         if (getRaiz() == null) {
             retorno = null;
         } else {
@@ -139,9 +141,46 @@ public class MyTreeImpl<K, T> implements MyTree<K, T> {
         return retorno;
     }
 
-    @Override
-    public void delete(K key) {
+    NodoTree<K,T> deleteNodo(NodoTree<K,T> nodo, K key) {
+        NodoTree<K, T> nodoKey = new NodoTree<K,T>(key, null);
+        if (nodo == null)
+            return nodo;
+        int comparacion = nodoKey.compareTo(nodo);
+        if (comparacion < 0)
+            nodo.setLeftChild(deleteNodo(nodo.getLeftChild(), key));
+        else if (comparacion > 0)
+            nodo.setRightChild(deleteNodo(nodo.getRightChild(), key));
+        else {
+            // Nodo encontrado, realizar la eliminación
+            if (nodo.getLeftChild() == null)
+                return nodo.getRightChild();
+            else if (nodo.getRightChild() == null)
+                return nodo.getLeftChild();
+            // Nodo con dos hijos: obtener el sucesor inmediato (el más pequeño en el subárbol derecho)
+            K value = minValue(nodo.getRightChild());
+            NodoTree<K, T> sucesor = find(value);
+            nodo.setData(sucesor.getData());
+            nodo.setKey(sucesor.getKey());
+            // Eliminar el sucesor inmediato
+            nodo.setRightChild(deleteNodo(nodo.getRightChild(), nodo.getKey()));
+        }
+        return nodo;
+    }
 
+    K minValue(NodoTree<K,T> minNodo) {
+        K minv = minNodo.getKey();
+        while (minNodo.getLeftChild() != null) {
+            minv = minNodo.getLeftChild().getKey();
+            minNodo = minNodo.getLeftChild();
+        }
+        return minv;
+    }
+
+    @Override
+    public NodoTree<K,T> delete(K key) {
+        NodoTree<K, T> nodo;
+        nodo = deleteNodo(raiz, key);
+        return nodo;
     }
 
     @Override
@@ -189,46 +228,72 @@ public class MyTreeImpl<K, T> implements MyTree<K, T> {
         return cuentaNodoLleno(raiz);
     }
 
-    private Lista<T> inOrden(NodoTree<K, T> nodo, Lista<T> lista) {
-        if (nodo!= null) {
-            inOrden(nodo.getLeftChild(),lista);
-            lista.add(nodo.getData());
+    private Lista<K> inOrden(NodoTree<K, T> nodo, Lista<K> lista) {
+        if (nodo != null) {
+            inOrden(nodo.getLeftChild(), lista);
+            lista.add(nodo.getKey());
             inOrden(nodo.getRightChild(), lista);
         }
         return lista;
     }
+
     @Override
-    public Lista<T> inOrder() {
-        Lista<T> lista = new ListaEnlazada();
+    public Lista<K> inOrder() {
+        Lista<K> lista = new ListaEnlazada();
         return inOrden(raiz, lista);
     }
 
-    private Lista<T> preOrden(NodoTree<K, T> nodo, Lista<T> lista) {
-        if (nodo!= null) {
-            lista.add(nodo.getData());
-            preOrden(nodo.getLeftChild(),lista);
+    private Lista<K> preOrden(NodoTree<K, T> nodo, Lista<K> lista) {
+        if (nodo != null) {
+            lista.add(nodo.getKey());
+            preOrden(nodo.getLeftChild(), lista);
             preOrden(nodo.getRightChild(), lista);
         }
         return lista;
     }
+
     @Override
-    public Lista<T> preOrder() {
-        Lista<T> lista = new ListaEnlazada();
+    public Lista<K> preOrder() {
+        Lista<K> lista = new ListaEnlazada();
         return preOrden(raiz, lista);
     }
 
-    private Lista<T> postOrden(NodoTree<K, T> nodo, Lista<T> lista) {
-        if (nodo!= null) {
-            postOrden(nodo.getLeftChild(),lista);
+    private Lista<K> postOrden(NodoTree<K, T> nodo, Lista<K> lista) {
+        if (nodo != null) {
+            postOrden(nodo.getLeftChild(), lista);
             postOrden(nodo.getRightChild(), lista);
-            lista.add(nodo.getData());
+            lista.add(nodo.getKey());
         }
         return lista;
     }
+
     @Override
-    public Lista<T> postOrder() {
-        Lista<T> lista = new ListaEnlazada();
+    public Lista<K> postOrder() {
+        Lista<K> lista = new ListaEnlazada();
         return postOrden(raiz, lista);
+    }
+
+    private Lista<K> porNivel(Lista<K> lista, MyQueue<NodoTree<K, T>> queue) throws MyQueue.EmptyQueueException {
+        while (!queue.isEmpty()) {
+            NodoTree<K, T> nodo = queue.dequeue().getValue();
+            lista.add(nodo.getKey());
+            if (nodo.getLeftChild() != null) {
+                queue.enqueue(nodo.getLeftChild());
+            }
+            if (nodo.getRightChild() != null) {
+                queue.enqueue(nodo.getRightChild());
+            }
+        }
+        return lista;
+    }
+
+    @Override
+    public Lista<K> levelOrder() throws MyQueue.EmptyQueueException {
+        Lista<K> lista = new ListaEnlazada();
+        MyQueue<NodoTree<K, T>> queue = new MyQueueImpl<>();
+        queue.enqueue(raiz);
+        lista = porNivel(lista, queue);
+        return lista;
     }
 
     @Override

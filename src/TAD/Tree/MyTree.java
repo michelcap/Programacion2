@@ -1,6 +1,7 @@
 package TAD.Tree;
 
 import TAD.LinkedList.Lista;
+import TAD.Queue.MyQueue;
 
 public interface MyTree<K, T> {
 
@@ -10,7 +11,7 @@ public interface MyTree<K, T> {
 
     NodoTree<K,T> getRaiz();
 
-    void delete(K key);
+    NodoTree<K,T> delete(K key);
 
     int size();
 
@@ -20,11 +21,13 @@ public interface MyTree<K, T> {
 
     int countCompleteElements();
 
-    Lista<T> inOrder();
+    Lista<K> inOrder();
 
-    Lista<T> preOrder();
+    Lista<K> preOrder();
 
-    Lista<T> postOrder();
+    Lista<K> postOrder();
+
+    Lista<K> levelOrder() throws MyQueue.EmptyQueueException;
 
     boolean isEmpty();
 }

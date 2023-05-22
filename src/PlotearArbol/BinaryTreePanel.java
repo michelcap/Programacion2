@@ -24,7 +24,7 @@ class BinaryTreePanel<K,T> extends JPanel {
 
     private void displayTree(Graphics g, NodoTree<K,T> node, int x, int y, int hGap) {
         g.drawOval(x - radius, y - radius, 2 * radius, 2 * radius);
-        g.drawString(node.getData() + "", x - 6, y + 4);
+        g.drawString(node.getKey() + "-" +node.getData(), x - 8, y + 4);
 
         if (node.getLeftChild() != null) {
             connectLeftChild(g, x - hGap, y + vGap, x, y);
