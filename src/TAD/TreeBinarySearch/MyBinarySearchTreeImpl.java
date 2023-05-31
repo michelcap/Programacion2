@@ -1,18 +1,20 @@
-package TAD.Tree;
+package TAD.TreeBinarySearch;
 
 import TAD.LinkedList.Lista;
 import TAD.LinkedList.ListaEnlazada;
 import TAD.Queue.MyQueue;
 import TAD.Queue.MyQueueImpl;
+import TAD.Tree.MyTree;
+import TAD.Tree.NodoTree;
 
-public class MyTreeImpl<K, T> implements MyTree<K, T> {
+public class MyBinarySearchTreeImpl<K, T> implements MyBinarySearchTree<K, T> {
     K key;
     T data;
     NodoTree<K, T> parent;
     NodoTree<K, T> raiz;
     int size = 0;
 
-    public MyTreeImpl() {
+    public MyBinarySearchTreeImpl() {
         this.key = null;
         this.data = null;
     }
@@ -300,6 +302,4 @@ public class MyTreeImpl<K, T> implements MyTree<K, T> {
     public boolean isEmpty() {
         return getRaiz() == null;
     }
-
-
 }

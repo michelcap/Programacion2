@@ -2,6 +2,8 @@ package TAD.Queue;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.function.BooleanSupplier;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class MyQueueImplTest {
@@ -42,5 +44,13 @@ class MyQueueImplTest {
         assertTrue(queue.isEmpty());
         queue.enqueue(1);
         assertFalse(queue.isEmpty());
+    }
+
+    @Test
+    void head() throws MyQueue.EmptyQueueException {
+        MyQueue<Integer> queue = new MyQueueImpl<>();
+        assertTrue(queue.isEmpty());
+        queue.enqueue(1);
+        assertEquals(1, queue.head().getValue());
     }
 }
