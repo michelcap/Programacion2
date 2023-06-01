@@ -1,6 +1,8 @@
 package TAD.TreeBinarySearch;
 
-public class NodoBST<K extends Comparable<K>, T> {
+import TAD.Tree.NodoTree;
+
+public class NodoBST<K, T> implements Comparable<NodoBST<K, T>>{
     K key;
     T data;
     int count = 0;
@@ -61,5 +63,15 @@ public class NodoBST<K extends Comparable<K>, T> {
                 return nodosCompletos(n.getLeftChild()) + nodosCompletos(n.getRightChild()) + 1;
             return nodosCompletos(n.getLeftChild()) + nodosCompletos(n.getRightChild());
         }
+    }
+
+    @Override
+    public int compareTo(NodoBST<K, T> o) {
+        if((Integer) this.key < (Integer) o.getKey())
+            return -1;
+        else if((Integer) this.key > (Integer) o.getKey())
+            return 1;
+        else
+            return 0;
     }
 }

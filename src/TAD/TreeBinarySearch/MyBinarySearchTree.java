@@ -2,16 +2,15 @@ package TAD.TreeBinarySearch;
 
 import TAD.LinkedList.Lista;
 import TAD.Queue.MyQueue;
-import TAD.Tree.NodoTree;
 
-public interface MyBinarySearchTree<K, T>  {
+public interface MyBinarySearchTree<K extends Comparable<K>, T>  {
     void insert(K key, T data);
 
-    NodoTree<K,T> find(K key);
+    NodoBST<K,T> find(K key);
 
-    NodoTree<K,T> getRaiz();
+    NodoBST<K,T> getRaiz();
 
-    NodoTree<K,T> delete(K key);
+    NodoBST<K,T> delete(K key);
 
     int size();
 

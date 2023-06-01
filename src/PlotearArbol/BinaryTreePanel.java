@@ -5,7 +5,7 @@ import TAD.Tree.NodoTree;
 import javax.swing.*;
 import java.awt.*;
 
-class BinaryTreePanel<K,T> extends JPanel {
+class BinaryTreePanel<K extends Comparable<K>,T> extends JPanel {
     private NodoTree<K,T> root;
     private int radius = 20;
     private int vGap = 50;

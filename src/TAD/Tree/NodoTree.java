@@ -1,5 +1,8 @@
 package TAD.Tree;
 
+import java.time.LocalDate;
+import java.util.Date;
+
 public class NodoTree<K, T> implements Comparable<NodoTree<K, T>>{
     K key;
     T data;
@@ -53,13 +56,30 @@ public class NodoTree<K, T> implements Comparable<NodoTree<K, T>>{
         this.rightChild = rightChild;
     }
 
+//    @Override
+//    public int compareTo(NodoTree<K, T> o) {
+//        return ((Integer) this.key).compareTo((Integer) o.getKey());
+//    }
+
     @Override
     public int compareTo(NodoTree<K, T> o) {
-        if((Integer) this.key < (Integer) o.getKey())
-            return -1;
-        else if((Integer) this.key > (Integer) o.getKey())
-            return 1;
-        else
+        if (o.getKey() instanceof String) {
+            return ((String) this.key).compareTo((String) o.getKey());
+        } else if (o.getKey() instanceof Integer) {
+            return ((Integer) this.key).compareTo((Integer) o.getKey());
+        } else if (o.getKey() instanceof Double) {
+            return ((Double) this.key).compareTo((Double) o.getKey());
+        } else if (o.getKey() instanceof Long) {
+            return ((Long) this.key).compareTo((Long) o.getKey());
+        } else if (o.getKey() instanceof Short) {
+            return ((Short) this.key).compareTo((Short) o.getKey());
+        } else if (o.getKey() instanceof Float) {
+            return ((Float) this.key).compareTo((Float) o.getKey());
+        } else if (o.getKey() instanceof Date) {
+            return ((Date) this.key).compareTo((Date) o.getKey());
+        } else if (o.getKey() instanceof LocalDate) {
+            return ((LocalDate) this.key).compareTo((LocalDate) o.getKey());
+        }
         return 0;
     }
 

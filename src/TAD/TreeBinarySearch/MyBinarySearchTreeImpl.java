@@ -4,14 +4,14 @@ import TAD.LinkedList.Lista;
 import TAD.LinkedList.ListaEnlazada;
 import TAD.Queue.MyQueue;
 import TAD.Queue.MyQueueImpl;
-import TAD.Tree.MyTree;
-import TAD.Tree.NodoTree;
 
-public class MyBinarySearchTreeImpl<K, T> implements MyBinarySearchTree<K, T> {
+import TAD.TreeBinarySearch.NodoBST;
+
+public class MyBinarySearchTreeImpl<K extends Comparable<K>, T> implements MyBinarySearchTree<K, T> {
     K key;
     T data;
-    NodoTree<K, T> parent;
-    NodoTree<K, T> raiz;
+    NodoBST<K, T> parent;
+    NodoBST<K, T> raiz;
     int size = 0;
 
     public MyBinarySearchTreeImpl() {
@@ -35,19 +35,19 @@ public class MyBinarySearchTreeImpl<K, T> implements MyBinarySearchTree<K, T> {
         this.data = data;
     }
 
-    public NodoTree<K, T> getParent() {
+    public NodoBST<K, T> getParent() {
         return parent;
     }
 
-    public void setParent(NodoTree<K, T> parent) {
+    public void setParent(NodoBST<K, T> parent) {
         this.parent = parent;
     }
 
-    public NodoTree<K, T> getRaiz() {
+    public NodoBST<K, T> getRaiz() {
         return raiz;
     }
 
-    public void setRaiz(NodoTree<K, T> raiz) {
+    public void setRaiz(NodoBST<K, T> raiz) {
         this.raiz = raiz;
     }
 
@@ -61,9 +61,9 @@ public class MyBinarySearchTreeImpl<K, T> implements MyBinarySearchTree<K, T> {
 
     @Override
     public void insert(K key, T data) {
-        NodoTree<K, T> nodo = new NodoTree<>(key, data);
+        NodoBST<K, T> nodo = new NodoBST<>(key, data);
         if (getRaiz() == null) {
-            NodoTree<K, T> kayParent = new NodoTree<>(key, data);
+            NodoBST<K, T> kayParent = new NodoBST<>(key, data);
             setParent(kayParent);
             setRaiz(kayParent);
             nodo.setLeftChild(null);
@@ -102,9 +102,9 @@ public class MyBinarySearchTreeImpl<K, T> implements MyBinarySearchTree<K, T> {
         }
     }
 
-    private NodoTree<K, T> serch(K key) {
-        NodoTree<K, T> nodo = new NodoTree<>(key, null);
-        NodoTree<K, T> retorno = null;
+    private NodoBST<K, T> serch(K key) {
+        NodoBST<K, T> nodo = new NodoBST<>(key, null);
+        NodoBST<K, T> retorno = null;
         if (getParent().compareTo(nodo) < 0) {
             if (getParent().getRightChild() == null) {
                 retorno = null;
@@ -132,8 +132,8 @@ public class MyBinarySearchTreeImpl<K, T> implements MyBinarySearchTree<K, T> {
     }
 
     @Override
-    public NodoTree<K, T> find(K key) {
-        NodoTree<K, T> retorno = null;
+    public NodoBST<K, T> find(K key) {
+        NodoBST<K, T> retorno = null;
         if (getRaiz() == null) {
             retorno = null;
         } else {
@@ -143,8 +143,8 @@ public class MyBinarySearchTreeImpl<K, T> implements MyBinarySearchTree<K, T> {
         return retorno;
     }
 
-    NodoTree<K,T> deleteNodo(NodoTree<K, T> nodo, K key) {
-        NodoTree<K, T> nodoKey = new NodoTree<K,T>(key, null);
+    NodoBST<K,T> deleteNodo(NodoBST<K, T> nodo, K key) {
+        NodoBST<K, T> nodoKey = new NodoBST<K,T>(key, null);
         if (nodo == null)
             return nodo;
         int comparacion = nodoKey.compareTo(nodo);
@@ -160,7 +160,7 @@ public class MyBinarySearchTreeImpl<K, T> implements MyBinarySearchTree<K, T> {
                 return nodo.getLeftChild();
             // Nodo con dos hijos: obtener el sucesor inmediato (el más pequeño en el subárbol derecho)
             K value = minValue(nodo.getRightChild());
-            NodoTree<K, T> sucesor = find(value);
+            NodoBST<K, T> sucesor = find(value);
             nodo.setData(sucesor.getData());
             nodo.setKey(sucesor.getKey());
             // Eliminar el sucesor inmediato
@@ -169,7 +169,7 @@ public class MyBinarySearchTreeImpl<K, T> implements MyBinarySearchTree<K, T> {
         return nodo;
     }
 
-    K minValue(NodoTree<K,T> minNodo) {
+    K minValue(NodoBST<K,T> minNodo) {
         K minv = minNodo.getKey();
         while (minNodo.getLeftChild() != null) {
             minv = minNodo.getLeftChild().getKey();
@@ -179,8 +179,8 @@ public class MyBinarySearchTreeImpl<K, T> implements MyBinarySearchTree<K, T> {
     }
 
     @Override
-    public NodoTree<K,T> delete(K key) {
-        NodoTree<K, T> nodo;
+    public NodoBST<K,T> delete(K key) {
+        NodoBST<K, T> nodo;
         nodo = deleteNodo(raiz, key);
         return nodo;
     }
@@ -190,7 +190,7 @@ public class MyBinarySearchTreeImpl<K, T> implements MyBinarySearchTree<K, T> {
         return getSize();
     }
 
-    private int cuentaHoja(NodoTree<K, T> nodo) {
+    private int cuentaHoja(NodoBST<K, T> nodo) {
         if (nodo == null) {
             return 0;
         }
@@ -212,7 +212,7 @@ public class MyBinarySearchTreeImpl<K, T> implements MyBinarySearchTree<K, T> {
         return 0;
     }
 
-    int cuentaNodoLleno(NodoTree<K, T> nodo) {
+    int cuentaNodoLleno(NodoBST<K, T> nodo) {
         if (nodo == null) {
             return 0;
         }
@@ -230,7 +230,7 @@ public class MyBinarySearchTreeImpl<K, T> implements MyBinarySearchTree<K, T> {
         return cuentaNodoLleno(raiz);
     }
 
-    private Lista<K> inOrden(NodoTree<K, T> nodo, Lista<K> lista) {
+    private Lista<K> inOrden(NodoBST<K, T> nodo, Lista<K> lista) {
         if (nodo != null) {
             inOrden(nodo.getLeftChild(), lista);
             lista.add(nodo.getKey());
@@ -245,7 +245,7 @@ public class MyBinarySearchTreeImpl<K, T> implements MyBinarySearchTree<K, T> {
         return inOrden(raiz, lista);
     }
 
-    private Lista<K> preOrden(NodoTree<K, T> nodo, Lista<K> lista) {
+    private Lista<K> preOrden(NodoBST<K, T> nodo, Lista<K> lista) {
         if (nodo != null) {
             lista.add(nodo.getKey());
             preOrden(nodo.getLeftChild(), lista);
@@ -260,7 +260,7 @@ public class MyBinarySearchTreeImpl<K, T> implements MyBinarySearchTree<K, T> {
         return preOrden(raiz, lista);
     }
 
-    private Lista<K> postOrden(NodoTree<K, T> nodo, Lista<K> lista) {
+    private Lista<K> postOrden(NodoBST<K, T> nodo, Lista<K> lista) {
         if (nodo != null) {
             postOrden(nodo.getLeftChild(), lista);
             postOrden(nodo.getRightChild(), lista);
@@ -275,9 +275,9 @@ public class MyBinarySearchTreeImpl<K, T> implements MyBinarySearchTree<K, T> {
         return postOrden(raiz, lista);
     }
 
-    private Lista<K> porNivel(Lista<K> lista, MyQueue<NodoTree<K, T>> queue) throws MyQueue.EmptyQueueException {
+    private Lista<K> porNivel(Lista<K> lista, MyQueue<NodoBST<K, T>> queue) throws MyQueue.EmptyQueueException {
         while (!queue.isEmpty()) {
-            NodoTree<K, T> nodo = queue.dequeue().getValue();
+            NodoBST<K, T> nodo = queue.dequeue().getValue();
             lista.add(nodo.getKey());
             if (nodo.getLeftChild() != null) {
                 queue.enqueue(nodo.getLeftChild());
@@ -292,7 +292,7 @@ public class MyBinarySearchTreeImpl<K, T> implements MyBinarySearchTree<K, T> {
     @Override
     public Lista<K> levelOrder() throws MyQueue.EmptyQueueException {
         Lista<K> lista = new ListaEnlazada();
-        MyQueue<NodoTree<K, T>> queue = new MyQueueImpl<>();
+        MyQueue<NodoBST<K, T>> queue = new MyQueueImpl<>();
         queue.enqueue(raiz);
         lista = porNivel(lista, queue);
         return lista;
