@@ -80,6 +80,6 @@ class MyTreeBinaryCompletoImplTest {
         arbol.insert(12, "j");
         arbol.insert(0, "k");
         arbol.insert(20, "l");
-        System.out.println(arbol.toString());
+        System.out.println(arbol);
     }
 }
