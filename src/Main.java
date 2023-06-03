@@ -1,20 +1,74 @@
-import java.util.LinkedList;
-import java.util.Queue;
+import TAD.Hash.HashTablaImpl;
+
+import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) {
-//        Scanner scanner = new Scanner(System.in);
-//        System.out.print("Inresar Cantidad de Personas: ");
-//        String cantidadPersonas = scanner.nextLine();
-//        int numeroPersonas = Integer.parseInt(cantidadPersonas);
-//        System.out.print("Inresar Saltos de Lugares: ");
-//        String cantidadSatos = scanner.nextLine();
-//        int numeroSaltos = Integer.parseInt(cantidadSatos);
-//        ProbleaDeJosefo juegoInteger = new ProbleaDeJosefo(numeroPersonas, numeroSaltos);
-//        int ganador = juegoInteger.Ganador();
-//        System.out.println("GANADOR! #" + ganador);
-//          P2_E3<Character> paractico2ejercicio3 = new P2_E3();
-//          paractico2ejercicio3.leer();
+    public static void main(String[] args) throws Exception {
+        HashTablaImpl<String, String> tabla = new HashTablaImpl<>(3);
+        tabla.put("Pedro", "Pedro_0");
+        tabla.put("Roberto", "roberto_1");
+        tabla.put("Maria", "Maria_2");
+//        tabla.put("Juan", "Juan_3");
+//        tabla.put("Pancracio", "Pancracio_4");
+//        tabla.put("Juan Pedro", "Juan Pedro_5");
+
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Inresar Key: ");
+        String key = scanner.nextLine();
+        System.out.print("Inresar Data: ");
+        String data = scanner.nextLine();
+        tabla.put(key, data);
+
+        System.out.print("Inresar Key: ");
+        key = scanner.nextLine();
+        System.out.print("Inresar Data: ");
+        data = scanner.nextLine();
+        tabla.put(key, data);
+        System.out.print("Inresar Key: ");
+        key = scanner.nextLine();
+        System.out.print("Inresar Data: ");
+        data = scanner.nextLine();
+        tabla.put(key, data);
+        System.out.print("Inresar Key: ");
+        key = scanner.nextLine();
+        System.out.print("Inresar Data: ");
+        data = scanner.nextLine();
+        tabla.put(key, data);System.out.print("Inresar Key: ");
+        key = scanner.nextLine();
+        System.out.print("Inresar Data: ");
+        data = scanner.nextLine();
+        tabla.put(key, data);System.out.print("Inresar Key: ");
+        key = scanner.nextLine();
+        System.out.print("Inresar Data: ");
+        data = scanner.nextLine();
+        tabla.put(key, data);
+        System.out.print("Inresar Key: ");
+        key = scanner.nextLine();
+        System.out.print("Inresar Data: ");
+        data = scanner.nextLine();
+        tabla.put(key, data);
+        System.out.print("Inresar Key: ");
+        key = scanner.nextLine();
+        System.out.print("Inresar Data: ");
+        data = scanner.nextLine();
+        tabla.put(key, data);
+        System.out.print("Inresar Key: ");
+        key = scanner.nextLine();
+        System.out.print("Inresar Data: ");
+        data = scanner.nextLine();
+        tabla.put(key, data);
+        System.out.print("Inresar Key: ");
+        key = scanner.nextLine();
+        System.out.print("Inresar Data: ");
+        data = scanner.nextLine();
+        tabla.put(key, data);
+
+
+
+
+
+
+
 
     }
 }
