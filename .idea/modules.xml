@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/SegundosParciales.iml" filepath="$PROJECT_DIR$/SegundosParciales.iml" />
+      <module fileurl="file://$PROJECT_DIR$/p2_2020/p2_2020.iml" filepath="$PROJECT_DIR$/p2_2020/p2_2020.iml" />
+      <module fileurl="file://$PROJECT_DIR$/p2_2021/p2_2021.iml" filepath="$PROJECT_DIR$/p2_2021/p2_2021.iml" />
+      <module fileurl="file://$PROJECT_DIR$/p2_2022/p2_2022.iml" filepath="$PROJECT_DIR$/p2_2022/p2_2022.iml" />
+    </modules>
+  </component>
+</project>
