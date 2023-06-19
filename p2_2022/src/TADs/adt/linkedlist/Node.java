@@ -1,4 +1,4 @@
-package uy.edu.um.adt.linkedlist;
+package TADs.adt.linkedlist;
 
 public class Node<T> {
 

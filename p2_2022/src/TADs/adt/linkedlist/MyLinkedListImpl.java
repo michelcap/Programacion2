@@ -1,9 +1,11 @@
-package uy.edu.um.adt.linkedlist;
+package TADs.adt.linkedlist;
 
-import uy.edu.um.adt.queue.EmptyQueueException;
-import uy.edu.um.adt.queue.MyQueue;
-import uy.edu.um.adt.stack.EmptyStackException;
-import uy.edu.um.adt.stack.MyStack;
+import TADs.adt.queue.EmptyQueueException;
+import TADs.adt.queue.MyQueue;
+import TADs.adt.stack.EmptyStackException;
+import TADs.adt.stack.MyStack;
+
+import java.util.Iterator;
 
 public class MyLinkedListImpl<T> implements MyList<T>, MyQueue<T>, MyStack<T> {
 
@@ -88,6 +90,23 @@ public class MyLinkedListImpl<T> implements MyList<T>, MyQueue<T>, MyStack<T> {
         }
 
         return valueToReturn;
+    }
+
+
+    @Override
+    public T get(T valor) {
+        T toReturn = null;
+        Node<T> temp = this.first;
+        while (temp != null && !temp.getValue().equals(valor)) {
+            temp = temp.getNext();
+
+        }
+
+        if (temp != null){
+            toReturn = temp.getValue();
+        }
+
+        return toReturn;
     }
 
     @Override
@@ -231,5 +250,10 @@ public class MyLinkedListImpl<T> implements MyList<T>, MyQueue<T>, MyStack<T> {
         }
 
         return valueToReturn;
+    }
+
+    @Override
+    public Iterator<T> iterator() {
+        return new MyLinkedListIterator<>(this.first);
     }
 }

@@ -8,7 +8,6 @@ import exceptions.InformacionInvalida;
 import exceptions.ObjetoNoExiste;
 
 import java.time.LocalDate;
-import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
 

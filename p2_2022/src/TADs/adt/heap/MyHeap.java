@@ -1,4 +1,4 @@
-package TADs.uy.edu.um.adt.heap;
+package TADs.adt.heap;
 
 public interface MyHeap<T extends Comparable<T>> {
 
